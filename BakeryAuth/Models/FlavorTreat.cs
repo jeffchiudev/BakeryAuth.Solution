@@ -1,6 +1,6 @@
 namespace BakeryAuth.Models
 {
-  public class FlavorTreat
+    public class FlavorTreat
     {       
         public int FlavorTreatId { get; set; }
         public int TreatId { get; set; }

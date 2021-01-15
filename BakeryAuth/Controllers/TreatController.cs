@@ -22,30 +22,29 @@ namespace BakeryAuth.Controllers
             _db = db;
         }
 
-        public async Task<ActionResult> Index()
+        public ActionResult Index()
         {
-            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
-            var currentUser = await _userManager.FindByIdAsync(userId);
-            var userChilds = _db.Childs.Where(entry => entry.User.Id == currentUser.Id).ToList();
-            return View(userChilds);
+            var allUserTreats = _db.Treats.ToList();
+            return View(allUserTreats);
         }
 
+        [Authorize]
         public ActionResult Create()
         {
-            ViewBag.ParentId = new SelectList(_db.Parents, "ParentId", "ParentName");
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
             return View();
         }
 
         [HttpPost]
-        public async Task<ActionResult> Create(Child child, int ParentId)
+        public async Task<ActionResult> Create(Treat treat, int FlavorId)
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            child.User = currentUser;
-            _db.Childs.Add(child);
-            if (ParentId != 0)
+            treat.User = currentUser;
+            _db.Treats.Add(treat);
+            if (FlavorId != 0)
             {
-                _db.ParentChild.Add(new ParentChild() { ParentId = ParentId, ChildId = child.ChildId });
+                _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -53,45 +52,67 @@ namespace BakeryAuth.Controllers
 
         public ActionResult Details(int id)
         {
-            var thisChild = _db.Childs
-                .Include(child => child.Parents)
-                .ThenInclude(join => join.Parent)
-                .FirstOrDefault(child => child.ChildId == id);
-            return View(thisChild);
+            var thisTreat = _db.Treats
+                .Include(treat => treat.Flavors)
+                .ThenInclude(join => join.Flavor)
+                .Include(treat => treat.User)
+                .FirstOrDefault(treat => treat.TreatId == id);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            ViewBag.IsCurrentUser = userId != null ? userId == thisTreat.User.Id : false;
+            return View(thisTreat);
         }
 
-        public ActionResult Edit(int id)
+        [Authorize]
+        public async Task<ActionResult> Edit(int id)
         {
-            var thisChild = _db.Childs.FirstOrDefault(childs => childs.ChildId == id);
-            ViewBag.ParentId = new SelectList(_db.Parents, "ParentId", "Name");
-            return View(thisChild);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
+            if (thisTreat == null)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
+            return View(thisTreat);
         }
 
         [HttpPost]
-        public ActionResult Edit(Child child, int ParentId)
+        public ActionResult Edit(Treat treat, int FlavorId)
         {
-            if (ParentId != 0)
+            if (FlavorId != 0)
             {
-                _db.ParentChild.Add(new ParentChild() { ParentId = ParentId, ChildId = child.ChildId });
+                var returnedJoin = _db.FlavorTreat
+                    .Any(join => join.TreatId == treat.TreatId && join.FlavorId == FlavorId);
+                if (!returnedJoin)
+                {
+                _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
+                }
             }
-            _db.Entry(child).State = EntityState.Modified;
+            _db.Entry(treat).State = EntityState.Modified;
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddParent(int id)
+        [Authorize]
+        public async Task<ActionResult> AddFlavor(int id)
         {
-            var thisChild = _db.Childs.FirstOrDefault(childs => childs.ChildId == id);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
+            if (thisTreat == null)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
             ViewBag.ParentId = new SelectList(_db.Parents, "ParentId", "Name");
-            return View(thisChild);
+            return View(thisTreat);
         }
 
         [HttpPost]
-        public ActionResult AddParent(Child child, int ParentId)
+        public ActionResult AddFlavor(Treat treat, int FlavorId)
         {
-            if (ParentId != 0)
+            if (FlavorId != 0)
             {
-                _db.ParentChild.Add(new ParentChild() { ParentId = ParentId, ChildId = child.ChildId });
+                _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
             }
             _db.SaveChanges();
             return RedirectToAction("Index");

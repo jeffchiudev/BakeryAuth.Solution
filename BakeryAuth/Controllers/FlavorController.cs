@@ -62,7 +62,7 @@ namespace BakeryAuth.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            var thisFlavor = _db.Flavors.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(flavor => flavor.FlavorId == id);
+            Flavor thisFlavor = _db.Flavors.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(flavor => flavor.FlavorId == id);
             if (thisFlavor == null)
             {
                 return RedirectToAction("Details", new {id = id});
@@ -83,7 +83,7 @@ namespace BakeryAuth.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            var thisFlavor = _db.Flavors.Where(entry = entry.User.Id == currentUser.Id).FirstOrDefault(flavor => flavor.FlavorId == id);
+            Flavor thisFlavor = _db.Flavors.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(flavors => flavors.FlavorId == id);
             if (thisFlavor == null)
             {
                 return RedirectToAction("Details", new {id = id});
