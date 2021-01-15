@@ -14,11 +14,11 @@ namespace BakeryAuth.Controllers
     public class FlavorsController : Controller
     {
         private readonly BakeryAuthContext _db;
-        Private readonly UserManager<ApplicationUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
         public FlavorsController(UserManager<ApplicationUser> userManager, BakeryAuthContext db)
         {
-            _userManager = userManager
+            _userManager = userManager;
             _db = db;
         }
 
@@ -86,7 +86,7 @@ namespace BakeryAuth.Controllers
             var thisFlavor = _db.Flavors.Where(entry = entry.User.Id == currentUser.Id).FirstOrDefault(flavor => flavor.FlavorId == id);
             if (thisFlavor == null)
             {
-                return RedirectToAction("Details", new {id = id})
+                return RedirectToAction("Details", new {id = id});
             }
             return View(thisFlavor);
         }

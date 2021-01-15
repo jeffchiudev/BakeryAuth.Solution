@@ -1,4 +1,4 @@
-namespace ProjectName.ViewModels
+namespace BakeryAuth.ViewModels
 {
     public class LoginViewModel
     {

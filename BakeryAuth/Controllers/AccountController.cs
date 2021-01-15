@@ -6,7 +6,7 @@ using BakeryAuth.ViewModels;
 
 namespace BakeryAuth.Controllers
 {
-    public class AccountController : Controllers
+    public class AccountController : Controller
     {
         private readonly BakeryAuthContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
@@ -66,7 +66,7 @@ namespace BakeryAuth.Controllers
         [HttpPost]
         public async Task<ActionResult> LogOff()
         {
-            await _signInManager.SignOutAsync()
+            await _signInManager.SignOutAsync();
             return RedirectToAction("Index");
         }
     }
