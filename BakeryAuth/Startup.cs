@@ -5,9 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Identity;
-using ProjectName.Models;
+using BakeryAuth.Models;
 
-namespace ProjectName
+namespace BakeryAuth
 {
     public class Startup
     {
@@ -26,11 +26,11 @@ namespace ProjectName
             services.AddMvc();
 
             services.AddEntityFrameworkMySql()
-                .AddDbContext<ProjectNameContext>(options => options
+                .AddDbContext<BakeryAuthContext>(options => options
                 .UseMySql(Configuration["ConnectionStrings:DefaultConnection"]));
 
             services.AddIdentity<ApplicationUser, IdentityRole>()
-                        .AddEntityFrameworkStores<ProjectNameContext>()
+                        .AddEntityFrameworkStores<BakeryAuthContext>()
                         .AddDefaultTokenProviders();
 
             services.Configure<IdentityOptions>(options =>

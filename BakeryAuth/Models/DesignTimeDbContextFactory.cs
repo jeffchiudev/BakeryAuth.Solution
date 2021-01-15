@@ -3,24 +3,24 @@ using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;
 using System.IO;
 
-namespace ProjectName.Models
+namespace BakeryAuth.Models
 {
-    public class ProjectNameContextFactory : IDesignTimeDbContextFactory<ProjectNameContext>
+    public class BakeryAuthContextFactory : IDesignTimeDbContextFactory<BakeryAuthContext>
     {
 
-        ProjectNameContext IDesignTimeDbContextFactory<ProjectNameContext>.CreateDbContext(string[] args)
+        BakeryAuthContext IDesignTimeDbContextFactory<BakeryAuthContext>.CreateDbContext(string[] args)
         {
         IConfigurationRoot configuration = new ConfigurationBuilder()
             .SetBasePath(Directory.GetCurrentDirectory())
             .AddJsonFile("appsettings.json")
             .Build();
 
-        var builder = new DbContextOptionsBuilder<ProjectNameContext>();
+        var builder = new DbContextOptionsBuilder<BakeryAuthContext>();
         var connectionString = configuration.GetConnectionString("DefaultConnection");
 
         builder.UseMySql(connectionString);
 
-        return new ProjectNameContext(builder.Options);
+        return new BakeryAuthContext(builder.Options);
         }
     }
 }

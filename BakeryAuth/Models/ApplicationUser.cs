@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Identity;
 
-namespace ProjectName.Models
+namespace BakeryAuth.Models
 {
     public class ApplicationUser: IdentityUser
     {
