@@ -98,12 +98,12 @@ namespace BakeryAuth.Controllers
         {
             var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
             var currentUser = await _userManager.FindByIdAsync(userId);
-            var thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
+            Treat thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
             if (thisTreat == null)
             {
                 return RedirectToAction("Details", new { id = id });
             }
-            ViewBag.ParentId = new SelectList(_db.Parents, "ParentId", "Name");
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
             return View(thisTreat);
         }
 
@@ -118,17 +118,24 @@ namespace BakeryAuth.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult Delete(int id)
+        [Authorize]
+        public async Task<ActionResult> Delete(int id)
         {
-            var thisChild = _db.Childs.FirstOrDefault(childs => childs.ChildId == id);
-            return View(thisChild);
+            var userId = this.User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+            var currentUser = await _userManager.FindByIdAsync(userId);
+            Treat thisTreat = _db.Treats.Where(entry => entry.User.Id == currentUser.Id).FirstOrDefault(treats => treats.TreatId == id);
+            if (thisTreat == null)
+            {
+                return RedirectToAction("Details", new { id = id });
+            }
+            return View(thisTreat);
         }
 
         [HttpPost, ActionName("Delete")]
         public ActionResult DeleteConfirmed(int id)
         {
-            var thisChild = _db.Childs.FirstOrDefault(childs => childs.ChildId == id);
-            _db.Childs.Remove(thisChild);
+            var thisTreat = _db.Treats.FirstOrDefault(treats => treats.TreatId == id);
+            _db.Treats.Remove(thisTreat);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }
@@ -136,8 +143,8 @@ namespace BakeryAuth.Controllers
         [HttpPost]
         public ActionResult DeleteParent(int joinId)
         {
-            var joinEntry = _db.ParentChild.FirstOrDefault(entry => entry.ParentChildId == joinId);
-            _db.ParentChild.Remove(joinEntry);
+            var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
+            _db.FlavorTreat.Remove(joinEntry);
             _db.SaveChanges();
             return RedirectToAction("Index");
         }

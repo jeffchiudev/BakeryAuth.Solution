@@ -4,7 +4,7 @@ namespace BakeryAuth.ViewModels
 {
     public class RegisterViewModel
     {
-        [Reguired]
+        [Required]
         [EmailAddress]
         [Display(Name="Email")]
         public string Email { get; set; }

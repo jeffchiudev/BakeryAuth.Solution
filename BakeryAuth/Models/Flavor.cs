@@ -2,7 +2,7 @@ using System.Collections.Generic; //parent class
 
 namespace BakeryAuth.Models
 {
-  public class Flavor
+    public class Flavor
     {
         public Flavor()
         {
