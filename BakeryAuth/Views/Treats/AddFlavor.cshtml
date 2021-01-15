@@ -4,23 +4,19 @@
 
 @model BakeryAuth.Models.Treat
 
-<h1>Edit Treat</h1>
-<hr/>
-<h4>Edit this treat: @Html.DisplayFor(model => model.TreatName)</h4>
+<h2>Add A Treat</h2>
+
+<h4>Add a flavor profile to this treat: @Html.DisplayFor(model => model.TreatName)</h4>
 
 @using (Html.BeginForm())
 {
     @Html.HiddenFor(model => model.TreatId)
 
-    <p>Treat Name:</p>
-    @Html.EditorFor(model => model.TreatName)
-    <br>
-    @Html.Label("Select Flavor Profile: ")
+    <h4>Select a Flavor Profile: </h4>
     @Html.DropDownList("FlavorId")
 
-    <br>
-    <input type="submit" value="Save" class="btn btn-primary" />
+    <input type="submit" value="Save" />
 }
-<hr />
+
 <p>@Html.ActionLink("Back to Treat List", "Index", null, null, new {@class="btn btn-primary"})</p>
 <p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>

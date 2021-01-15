@@ -1,19 +1,21 @@
-@* @{
+@{
   Layout = "_Layout";
 }
 
-@model ProjectName.Models.Child
+@model BakeryAuth.Models.Treat
 
-<h4>Add a new task</h4>
-
+<h4>Add a New Treat</h4>
+<hr/>
 @using (Html.BeginForm())
 {
-    @Html.LabelFor(model => model.Description)
-    @Html.TextBoxFor(model => model.Description)
+    <h3>Treat Name:</h3>
+    @Html.TextBoxFor(model => model.TreatName)
 
-    @Html.Label("Select parent")
-    @Html.DropDownList("ParentId")
+    @Html.Label("Select a Flavor Profile")
+    @Html.DropDownList("FlavorId")
 
-    <input type="submit" value="Add new child" class="btn btn-default" />
+    <input type="submit" value="Add a new Treat" class="btn btn-primary" />
 }
-<p>@Html.ActionLink("Show all childs", "Index")</p> *@
+<hr />
+<p>@Html.ActionLink("Show All Treats", "Index", null, null, new {@class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>
