@@ -1,20 +1,22 @@
-@* @{
-  Layout = "_Layout";
+@{
+    Layout = "_Layout";
 }
 
-@model ToDoList.Models.Category
+@model BakeryAuth.Models.Flavor
 
-<h2>Edit</h2>
+<h2>Edit Flavor</h2>
+<hr />
 
-<h4>Edit this category: @Html.DisplayFor(model => model.Name)</h4>
+<h4>Editing Flavor: @Html.DisplayFor(model => model.TagName)</h4>
 
 @using (Html.BeginForm())
 {
-    @Html.HiddenFor(model => model.CategoryId)
+    @Html.HiddenFor(model => model.FlavorId)
 
-    @Html.LabelFor(model => model.Name)
-    @Html.EditorFor(model => model.Name)
+    @Html.EditorFor(model => model.FlavorName)
 
-    <input type="submit" value="Save" />
+    <input type="submit" value="Edit flavor" class="btn btn-primary" />
 }
-<p>@Html.ActionLink("Back to categories", "Index")</p> *@
+<hr />
+<p>@Html.ActionLink("Back to Flavor Profiles", "Index", null, null, new {@class="btn btn-primary"})</p>
+<p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>

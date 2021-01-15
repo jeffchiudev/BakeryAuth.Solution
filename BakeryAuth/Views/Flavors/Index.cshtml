@@ -1,22 +1,28 @@
-@* @{
-  Layout = "_Layout";
+@{
+    Layout = "_Layout";
 }
 
-@using ToDoList.Models;
-@model List<ToDoList.Models.Category>;
+@using BakeryAuth.Models;
+@model List<BakeryAuth.Models.Flavor>;
 
-<h1>Categories</h1>
-
+<h1>Flavor Profiles</h1>
+<hr />
 @if (@Model.Count == 0)
 {
-  <h3>No categories have been added yet!</h3>
-} 
-
-@foreach (Category category in Model)
-{
-  <li>@Html.ActionLink($"{category.Name}", "Details", new { id = category.CategoryId })</li>
+    <h3>No flavor profiles have been added</h3>
 }
 
-<p>@Html.ActionLink("Add new category", "Create")</p>
-
-<p>@Html.ActionLink("Home", "Index", "Home")</p> *@
+@foreach (Flavor flavor in Model)
+{
+    @Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })<br>
+}
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@Html.ActionLink("Add New Flavor Profile", "Create", null, null, new {@class="btn btn-primary"})</p>
+}
+else
+{
+    <p>If you'd like to create a flavor profile, create an @Html.ActionLink("account here", "Register", "Account")</p>
+}
+<p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>

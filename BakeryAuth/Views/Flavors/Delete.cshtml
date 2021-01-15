@@ -1,14 +1,16 @@
-@* @{
-  Layout = "_Layout";
+@{
+    Layout = "_Layout";
 }
 
-@model ToDoList.Models.Category
+@model BakeryAuth.Models.Flavor
 
-<h2>Are you sure you want to delete this?</h2>
-
-@Html.DisplayNameFor(model => model.Name): @Html.DisplayFor(model => model.Name)
+<h2>Are you sure you want to delete this flavor profile?</h2>
+<hr />
+<h4>Flavor Profile: @Html.DisplayFor(model => model.FlavorName)</h4>
 @using (Html.BeginForm())
 {
     <input type="submit" value="Delete" />
 }
-@Html.ActionLink("Back to categories", "Index") *@
+<hr />
+@Html.ActionLink("Back to Flavor Index", "Index", null, null, new {@class="btn btn-primary"})
+<p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>
