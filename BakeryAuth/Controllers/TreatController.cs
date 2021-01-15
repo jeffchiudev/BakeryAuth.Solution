@@ -7,17 +7,16 @@ using System.Threading.Tasks;
 using System.Security.Claims;
 using System.Collections.Generic;
 using System.Linq;
-using ProjectName.Models;
+using BakeryAuth.Models;
 
-namespace ProjectName.Controllers
+namespace BakeryAuth.Controllers
 {
-    [Authorize]
-    public class ChildsController : Controller
+    public class TreatsController : Controller
     {
-        private readonly ProjectNameContext _db;
+        private readonly BakeryAuthContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
 
-        public ChildsController(UserManager<ApplicationUser> userManager, ProjectNameContext db)
+        public TreatsController(UserManager<ApplicationUser> userManager, BakeryAuthContext db)
         {
             _userManager = userManager;
             _db = db;

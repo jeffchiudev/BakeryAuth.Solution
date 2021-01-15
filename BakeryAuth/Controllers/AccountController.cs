@@ -1,14 +1,14 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Identity;
 using System.Threading.Tasks;
-using ProjectName.Models;
-using ProjectName.ViewModels;
+using BakeryAuth.Models;
+using BakeryAuth.ViewModels;
 
-namespace ProjectName.Controllers
+namespace BakeryAuth.Controllers
 {
     public class AccountController : Controllers
     {
-        private readonly ProjectNameContext _db;
+        private readonly BakeryAuthContext _db;
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
 
