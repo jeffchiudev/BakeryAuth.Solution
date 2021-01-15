@@ -1,8 +1,25 @@
-@* @{
-  Layout = "_Layout";
+@{
+    Layout = "_Layout";
 }
 
-<h1>Welcome to the ExampleProjectName!</h1>
-<p>@Html.ActionLink("Create an account", "Index", "Account")</p>
-<p>@Html.ActionLink("See all Parents", "Index", "Parentss")</p>
-<p>@Html.ActionLink("See all Childs", "Index", "Childs")</p> *@
+<h1>Welcome to the Pierre's Bakery!</h1>
+<hr />
+<h4>Welcome to Pierres!! Please enter your order! </h4>
+<hr />
+@if (User.Identity.IsAuthenticated)
+{
+    <p>@Html.ActionLink("See all Flavor Categories", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("See all Treats", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
+    @using (Html.BeginForm("LogOff", "Account"))
+    {
+        <input type="submit" class="btn btn-primary" value="Log Out"/>
+    }
+}
+else
+{    
+    <p>@Html.ActionLink("Log in", "Login", "Account", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("Create Account", "Index", "Account", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("See all Flavor Categories", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("See all Treats", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
+
+}
