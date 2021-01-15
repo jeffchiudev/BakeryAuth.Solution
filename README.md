@@ -1,6 +1,6 @@
 <div align="center">
 
-# TODO PRoject Title
+# Pierre's Bakery v3.0
 
 </div>
 
@@ -8,19 +8,22 @@
 <img src="https://github.com/jeffchiudev.png" width="200px" height="auto" style="border-radius: 15px 50px;">
 
 </div>
-<h3 align="center">Many-to-many relationship database, 08.Jan.2021</h3>
+<h3 align="center">Bakery ordering system with authorization, 08.Jan.2021</h3>
 <h4 align="center"> By Jeff Chiu</h4>
 
 
 ## Description: 
 
+2021 has gotten off to an amazing start and Pierre's Bakery Co. has now expanded beyond the borders of the Portland and the Pacific Northwest and broken into the competitive bakery market in Canada.  Pierre's now supports online ordering (with the Pandemic it's been a literal lifesaver) and authentication needs to be a part of that. 
+
 ## Preview:
 
 #### User Stories:
 | ID | User Story | Accepted |
-| :-------- | :------ | :------- |
-||||
-||||
+| :--------: | :------: | :-------: |
+| US01 | The application should have user authentication. A user should be able to log in and log out. Only logged in users should have create, update and delete functionality. All users should be able to have read functionality. | false |
+| US02 | There should be a many-to-many relationship between Treats and Flavors. A treat can have many flavors (such as sweet, savory, spicy, or creamy) and a flavor can have many treats. For instance, the "sweet" flavor could include chocolate croissants, cheesecake, and so on. | false |
+| US03 | A user should be able to navigate to a splash page that lists all treats and flavors. Users should be able to click on an individual treat or flavor to see all the treats/flavors that belong to it. | false|
 
 ##### Software Requirements
 
@@ -32,9 +35,9 @@
 
 ##### Open Locally
 
-1. Click on the link to my repository on github [here](https://github.com/jeffchiudev/PROJECTNAME). 
+1. Click on the link to my repository on github [here](https://github.com/jeffchiudev/BakeryAuth.Solution). 
 2. Click on the green "Code" link near the top and above the README.md.
-3. Alternatively open your terminal and use the command `git clone https://github.com/jeffchiudev/PROJECTNAME` into the directory you would like to clone the repository.
+3. Alternatively open your terminal and use the command `git clone https://github.com/jeffchiudev/BakeryAuth.Solution` into the directory you would like to clone the repository.
 4. Open in text editor to view code.
 
 ##### Installing .NET
@@ -44,15 +47,15 @@
 3. Confirm the installation is successful by opening your terminal and running the command `dotnet --version`. The response should be something similar to this:`2.2.105`. This means it was successfully installed.
 
 #### Import Database & Entity Framework Core
-1. Navigate to the PROJECTNAME.Solution/PROJECTNAME directory in terminal.
+1. Navigate to the BakeryAuth.Solution/BakeryAuth directory in terminal.
 2. Run command `dotnet ef database update` to generate database.
 3. Run command `dotnet ef migrations add [MIGRATIONNAME]` and `dotnet ef database update` if you're making changes to the database. 
-4. To access your database that you've set up in MySQL workbench add the following code into a `appsettings.json` file in the `PROJECTNAME.Solutions/PROJECTDIRECTORY`:
+4. To access your database that you've set up in MySQL workbench add the following code into a `appsettings.json` file in the `BakeryAuth.Solution/BakeryAuth`:
 
 ```
 {
     "ConnectionStrings": {
-        "DefaultConnection": "Server=localhost;Port=3306;database=Jeff_Chiu_PROJECTNAME;uid=root;pwd=YourPassword;"
+        "DefaultConnection": "Server=localhost;Port=3306;database=Jeff_Chiu_bakery_auth;uid=root;pwd=YourPassword;"
     }
 }
 ```
@@ -72,7 +75,7 @@ INSERT DATABASE SCHEMA HERE
 
 ##### View In Browser
 
-1. To view in browser, navigate to `PROJECTNAME.Solutions/PROJECTNAME` in the command line.
+1. To view in browser, navigate to `BakeryAuth.Solution/BakeryAuth` in the command line.
 2. Use command `dotnet build` and `dotnet run` to start a local version of the page. 
 3. Navigate to http://localhost:5000
 
