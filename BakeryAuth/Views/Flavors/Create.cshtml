@@ -4,11 +4,11 @@
 
 @model BakeryAuth.Models.Flavor
 
-<h4>Create A New Tag</h4>
+<h4>Create A New Flavor Profile</h4>
 <hr />
 @using (Html.BeginForm())
 {
-    <h3>Flavor Profile Name:</h3>
+    <h3>Flavor Profile Name: @Html.TextBoxFor(model => model.FlavorName)</h3>
     <input type="submit" value="Add new flavor profile" class="btn btn-primary" />
 }
 <hr />

@@ -103,7 +103,7 @@ namespace BakeryAuth.Controllers
             {
                 return RedirectToAction("Details", new { id = id });
             }
-            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "Name");
+            ViewBag.FlavorId = new SelectList(_db.Flavors, "FlavorId", "FlavorName");
             return View(thisTreat);
         }
 

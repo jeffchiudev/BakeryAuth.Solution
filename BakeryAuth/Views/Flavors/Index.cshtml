@@ -14,7 +14,7 @@
 
 @foreach (Flavor flavor in Model)
 {
-    @Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })<br>
+    <h4>@Html.ActionLink($"{flavor.FlavorName}", "Details", new { id = flavor.FlavorId })</h4>
 }
 <hr />
 @if (User.Identity.IsAuthenticated)
@@ -23,6 +23,6 @@
 }
 else
 {
-    <p>If you'd like to create a flavor profile, create an @Html.ActionLink("account here", "Register", "Account")</p>
+    <h4>If you'd like to create a flavor profile, create an @Html.ActionLink("account here", "Register", "Account")</h4>
 }
 <p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>
