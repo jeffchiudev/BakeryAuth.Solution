@@ -9,7 +9,7 @@
 @if (User.Identity.IsAuthenticated)
 {
     <p>@Html.ActionLink("See Master Flavor/Treat List", "Show", null, null, new {@class="btn btn-primary"})</p>
-    <p>@Html.ActionLink("See all Flavor Categories", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("See all Flavor Profiles", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
     <p>@Html.ActionLink("See all Treats", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
     @using (Html.BeginForm("LogOff", "Account"))
     {
@@ -22,6 +22,6 @@ else
     <p>@Html.ActionLink("Log in", "Login", "Account", null, new {@class="btn btn-primary"})</p>
     <p>@Html.ActionLink("Create Account", "Index", "Account", null, new {@class="btn btn-primary"})</p>
     <p>@Html.ActionLink("See Flavor Profiles", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
-    <p>@Html.ActionLink("See Treats", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
+    <p>@Html.ActionLink("See all Treats", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
 
 }
