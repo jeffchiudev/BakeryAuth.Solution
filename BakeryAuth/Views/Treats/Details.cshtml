@@ -33,6 +33,7 @@ else
     </ul>
 }
 <hr/>
+<p>@Html.ActionLink("See Master Flavor/Treat List", "Show", "Home", null, new {@class="btn btn-primary"})</p>
 <p>@Html.ActionLink("Back to treat list", "Index", null, null, new {@class="btn btn-primary"})</p>
 @if (User.Identity.IsAuthenticated && ViewBag.IsCurrentUser)
 {

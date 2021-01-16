@@ -4,7 +4,7 @@
 
 @model BakeryAuth.Models.Flavor;
 
-<h2>Flavor Details</h2>
+<h1>Flavor Details</h1>
 <hr />
 <h3>Flavor Profile: @Html.DisplayFor(model => model.FlavorName)</h3>
 
@@ -23,6 +23,7 @@ else
     </ul>
 }
 <hr />
+<p>@Html.ActionLink("See Master Flavor/Treat List", "Show", "Home", null, new {@class="btn btn-primary"})</p>
 <p>@Html.ActionLink("Back to Flavor Profiles", "Index", null, null, new {@class="btn btn-primary"})</p>
 @if (User.Identity.IsAuthenticated && ViewBag.IsCurrentUser)
 {

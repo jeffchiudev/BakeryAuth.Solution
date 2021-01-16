@@ -6,31 +6,37 @@
 @model dynamic;
 
 <h1>Pierre's Master Flavor & Treat Index:</h1>
-<hr/>
-<h2>Flavor Index:</h2>
-<hr/></h4>
-@if (@Model.Flavors.Count == 0)
-{
-    <h4>No Flavors to display.</h4>
-}
+<div class="row">
+    <div class="col-md-6">
+        <hr/>
+        <h2>Flavor Index:</h2>
+        <hr/>
+        @if (@Model.Flavors.Count == 0)
+        {
+            <h4>No Flavors to display.</h4>
+        }
 
-@foreach (Flavor flavor in Model.Flavors)
-{
-    <h4>@Html.ActionLink($"{flavor.FlavorName}", "Details", "Flavors", new {id = flavor.FlavorName})</h4>
-}
+        @foreach (Flavor flavor in Model.Flavors)
+        {
+            <h4>@Html.ActionLink($"{flavor.FlavorName}", "Details", "Flavors", new {id = flavor.FlavorId})</h4>
+        }
+    </div>
+    <div class="col-md-6">
+        <hr/>
+        <h2>Treat List:</h2>
+        <hr/>
+        @if (@Model.Treats.Count == 0)
+        {
+            <h4>No Treats to display.</h4>
+        }
+
+        @foreach (Treat treat in Model.Treats)
+        {
+            <h4>@Html.ActionLink($"{treat.TreatName}", "Details", "Treats", new {id = treat.TreatId})</h4>
+        }
+    </div>
+</div>
 <hr>
-<h2>Treat List:</h2>
-<hr/>
-@if (@Model.Treats.Count == 0)
-{
-    <h4>No Treats to display.</h4>
-}
-
-@foreach (Treat treat in Model.Treats)
-{
-    <h4>@Html.ActionLink($"{treat.TreatName}", "Details", "Treats", new {id = treat.TreatId})</h4>
-}
-<hr/>
 <p>@Html.ActionLink("Manage/Edit Flavor Profiles", "Index", "Flavors", null, new {@class="btn btn-primary"})</p>
 <p>@Html.ActionLink("Manage/Edit Treat List", "Index", "Treats", null, new {@class="btn btn-primary"})</p>
 <p>@Html.ActionLink("Home", "Index", "Home", null, new {@class="btn btn-primary"})</p>
