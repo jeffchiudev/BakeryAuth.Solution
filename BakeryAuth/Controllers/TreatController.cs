@@ -112,7 +112,12 @@ namespace BakeryAuth.Controllers
         {
             if (FlavorId != 0)
             {
+                var returnedJoin = _db.FlavorTreat
+                    .Any(join => join.TreatId == treat.TreatId && join.FlavorId == FlavorId);
+                if (!returnedJoin)
+                {
                 _db.FlavorTreat.Add(new FlavorTreat() { FlavorId = FlavorId, TreatId = treat.TreatId });
+                }
             }
             _db.SaveChanges();
             return RedirectToAction("Index");
@@ -141,7 +146,7 @@ namespace BakeryAuth.Controllers
         }
 
         [HttpPost]
-        public ActionResult DeleteParent(int joinId)
+        public ActionResult DeleteFlavor(int joinId)
         {
             var joinEntry = _db.FlavorTreat.FirstOrDefault(entry => entry.FlavorTreatId == joinId);
             _db.FlavorTreat.Remove(joinEntry);

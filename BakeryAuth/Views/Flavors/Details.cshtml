@@ -19,6 +19,14 @@ else
         @foreach (var join in Model.Treats)
         {
             <li>@join.Treat.TreatName</li>
+            @if(User.Identity.IsAuthenticated && ViewBag.IsCurrentUser)
+            {
+                @using (Html.BeginForm("DeleteTreat", "Flavors"))
+                {
+                    @Html.Hidden("joinId", @join.FlavorTreatId)
+                    <input type="submit" value="Delete" class="btn btn-primary"/>
+                }
+            }
         }
     </ul>
 }
