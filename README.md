@@ -199,6 +199,7 @@ If any errors or bugs occur please email me [here](jeffchiudev@gmail.com).
 - C# 7.3
 - CSS
 - Entity
+- Identity
 - Razor
 - REPL
 - VS Code
